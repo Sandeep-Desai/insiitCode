@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:insiit/features/mess/ui/feedback_page.dart';
 import 'package:insiit/features/mess/ui/main_page.dart';
 import 'package:insiit/global/data/constants.dart';
 import 'package:path_provider/path_provider.dart';
@@ -31,7 +32,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: {
         '/home': (context) => const HomeWrapper(),
-        '/messmenu': (context) => const MessMenu()
+        '/messmenu': (context) => const MessMenu(),
+        '/messfeedback': (context) => MessFeedBack(),
       },
       title: 'InsIIT',
       theme: ThemeData(fontFamily: 'OpenSans'),

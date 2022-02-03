@@ -22,7 +22,7 @@ class MainHomePage extends StatefulWidget {
 class _MainHomePageState extends State<MainHomePage>
     with AutomaticKeepAliveClientMixin<MainHomePage> {
   bool connected = true;
-  User user = User();
+  User user = dataContainer.user;
   String quote = '';
   String quoteAuthor = '';
 
