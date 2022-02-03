@@ -6,7 +6,7 @@ class User {
   String email;
   User(
       {this.name = 'John Doe',
-      this.imageUrl = 'random', // TODO
+      this.imageUrl = 'https://picsum.photos/200/300', // TODO
       this.uid = '12345',
       this.email = 'johndoe@iitgn.ac.in'});
   Map<String, dynamic> toJson() {
