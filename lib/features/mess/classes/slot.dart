@@ -19,6 +19,6 @@ class MessDay {
     required this.dinner,
     required this.snacks,
   }) {
-    allItems = [breakfast, lunch, dinner, snacks];
+    allItems = [breakfast, lunch, snacks, dinner];
   }
 }

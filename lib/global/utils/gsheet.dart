@@ -69,18 +69,20 @@ class GSheet {
   Stream<List> getData(String range, {forceRefresh = false}) async* {
     List returnval;
     List data = cache.get(range) ?? [];
-
-    if (data != [] && !forceRefresh) {
-      log("Getting data at $range from cache", name: debugTag);
+    if (data.isNotEmpty) {
+      log("Retrieved ${data.length} x ${data[0].length} from cache",
+          name: debugTag);
       yield data;
     }
 
-    if (forceRefresh || data == [] || isRefreshRequired()) {
+    if (forceRefresh || data.isEmpty || isRefreshRequired()) {
       log("Getting data at $range from internet", name: debugTag);
       returnval = await getDataOnline(range);
 
       cache.put(range, returnval);
       cache.put('lastAccessed', DateTime.now().toString());
+      log("Retrieved ${returnval.length} x ${returnval[0].length} from internet",
+          name: debugTag);
       yield returnval;
     }
   }

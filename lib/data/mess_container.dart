@@ -14,20 +14,19 @@ class MessContainer {
   List<MessItem> currentMeal = [];
   void getData({forceRefresh = false}) async {
     loadMessData(forceRefresh: forceRefresh);
-    loadFoodVotesData();
   }
 
   Future<void> init() async {
     log('Loading Mess', name: debugTag);
     cache = await Hive.openBox('mess');
     await sheet.initializeCache();
-    getData();
+    getData(forceRefresh: true);
   }
 
   // open app, load from cache, request new data, update cache.
 
   Future<void> loadMessData({forceRefresh = false}) async {
-    sheet.getData('Sheet6!A:G', forceRefresh: forceRefresh).listen((cache) {
+    sheet.getData('Sheet6!A:AB', forceRefresh: forceRefresh).listen((cache) {
       var data = [];
       for (int i = 0; i < cache.length; i++) {
         data.add(cache[i]);
@@ -40,12 +39,12 @@ class MessContainer {
       makeMessList(data, nBreakfast, nLunch, nSnack, nDinner);
 
       selectMeal();
+      loadFoodVotesData();
     });
   }
 
   void makeMessList(
       List data, int nBreakfast, int nLunch, int nSnack, int nDinner) {
-    data.removeAt(0);
     data.removeAt(0);
     data.removeAt(0);
 
@@ -58,41 +57,46 @@ class MessContainer {
         breakfast.add(MessItem(
           name: data[j][i * 4],
           calories: data[j][i * 4 + 1],
-          glutenFree: data[j][i * 4 + 2],
+          glutenFree: (data[j][i * 4 + 2] == "yes") ? true : false,
           imageUrl: data[j][i * 4 + 3],
         ));
       }
 
       List<MessItem> lunch = [];
-      times.add(data[0][i * 4 + nBreakfast]);
-      for (int j = 1; j < nLunch; j++) {
+      times.add(data[nBreakfast + 1][i * 4]);
+      for (int j = 2; j < nLunch + 1; j++) {
         lunch.add(MessItem(
-          name: data[j][i * 4 + nBreakfast],
-          calories: data[j][i * 4 + nBreakfast + 1],
-          glutenFree: data[j][i * 4 + nBreakfast + 2],
-          imageUrl: data[j][i * 4 + nBreakfast + 3],
+          name: data[j + nBreakfast][i * 4],
+          calories: data[j + nBreakfast][i * 4 + 1],
+          glutenFree: (data[j + nBreakfast][i * 4 + 2] == "yes") ? true : false,
+          imageUrl: data[j + nBreakfast][i * 4 + 3],
         ));
       }
 
       List<MessItem> snack = [];
-      times.add(data[0][i * 4 + nBreakfast + nLunch]);
-      for (int j = 1; j < nSnack; j++) {
+      times.add(data[nBreakfast + nLunch + 2][i * 4]);
+      for (int j = 3; j < nSnack + 2; j++) {
         snack.add(MessItem(
-          name: data[j][i * 4 + nBreakfast + nLunch],
-          calories: data[j][i * 4 + nBreakfast + nLunch + 1],
-          glutenFree: data[j][i * 4 + nBreakfast + nLunch + 2],
-          imageUrl: data[j][i * 4 + nBreakfast + nLunch + 3],
+          name: data[j + nBreakfast + nLunch][i * 4],
+          calories: data[j + nBreakfast + nLunch][i * 4 + 1],
+          glutenFree: (data[j + nBreakfast + nLunch][i * 4 + 2] == "yes")
+              ? true
+              : false,
+          imageUrl: data[j + nBreakfast + nLunch][i * 4 + 3],
         ));
       }
 
       List<MessItem> dinner = [];
-      times.add(data[0][i * 4 + nBreakfast + nLunch + nSnack]);
-      for (int j = 1; j < nDinner; j++) {
+      times.add(data[nBreakfast + nLunch + nSnack + 3][i * 4]);
+      for (int j = 4; j < nDinner + 3; j++) {
         dinner.add(MessItem(
-          name: data[j][i * 4 + nBreakfast + nLunch + nSnack],
-          calories: data[j][i * 4 + nBreakfast + nLunch + nSnack + 1],
-          glutenFree: data[j][i * 4 + nBreakfast + nLunch + nSnack + 2],
-          imageUrl: data[j][i * 4 + nBreakfast + nLunch + nSnack + 3],
+          name: data[j + nBreakfast + nLunch + nSnack][i * 4],
+          calories: data[j + nBreakfast + nLunch + nSnack][i * 4 + 1],
+          glutenFree:
+              (data[j + nBreakfast + nLunch + nSnack][i * 4 + 2] == "yes")
+                  ? true
+                  : false,
+          imageUrl: data[j + nBreakfast + nLunch + nSnack][i * 4 + 3],
         ));
       }
 
@@ -107,12 +111,19 @@ class MessContainer {
   }
 
   void loadFoodVotesData() {
-    Map<String, int> data = cache.get('foodvotes') as Map<String, int>;
+    var data = cache.get('foodvotes') ?? {};
     for (int i = 0; i < 7; i++) {
-      for (MessDay day in items[i] as List<MessDay>) {
-        for (MessItem item in day.breakfast) {
-          item.vote = data[item.name] ?? 0;
-        }
+      for (MessItem item in items[i]!.breakfast) {
+        item.vote = data[item.name] ?? 0;
+      }
+      for (MessItem item in items[i]!.lunch) {
+        item.vote = data[item.name] ?? 0;
+      }
+      for (MessItem item in items[i]!.snacks) {
+        item.vote = data[item.name] ?? 0;
+      }
+      for (MessItem item in items[i]!.dinner) {
+        item.vote = data[item.name] ?? 0;
       }
     }
   }

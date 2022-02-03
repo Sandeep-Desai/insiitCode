@@ -10,5 +10,9 @@ class MessItem {
     required this.imageUrl,
     this.vote = 0,
     required this.glutenFree,
-  });
+  }) {
+    if (imageUrl == '-') {
+      imageUrl = "https://picsum.photos/200/300";
+    }
+  }
 }

@@ -71,6 +71,11 @@ class _MessMenuState extends State<MessMenu> {
                               : theme.iconColorLite,
                           onPressed: () async {
                             setState(() {
+                              if (item.vote == -1) {
+                                item.vote = 0;
+                              } else {
+                                item.vote = -1;
+                              }
                               // voting system to change TODO
                               dataContainer.mess.sheet.writeData([
                                 [
@@ -95,6 +100,8 @@ class _MessMenuState extends State<MessMenu> {
                             setState(() {
                               if (item.vote == 1) {
                                 item.vote = 0;
+                              } else {
+                                item.vote = 1;
                               }
 
 // change voting system TODO
@@ -173,8 +180,8 @@ class _MessMenuState extends State<MessMenu> {
                                       "",
                                   messHeadings[index]),
                               children: <Widget>[
-                                createItemCard(dataContainer
-                                        .mess.items[dayIndex]?.breakfast ??
+                                createItemCard(dataContainer.mess
+                                        .items[dayIndex]?.allItems[index] ??
                                     []),
                               ],
                             ),
