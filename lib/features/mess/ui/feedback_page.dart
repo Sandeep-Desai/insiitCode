@@ -7,8 +7,11 @@ class MessFeedBack extends StatefulWidget {
   _MessFeedBackState createState() => _MessFeedBackState();
 }
 
+enum Caterer { jaiswal, mohani }
+
 class _MessFeedBackState extends State<MessFeedBack> {
   String review = '';
+  Caterer caterer = Caterer.jaiswal;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +42,33 @@ class _MessFeedBackState extends State<MessFeedBack> {
                           fontSize: 19,
                           fontWeight: FontWeight.bold,
                           color: theme.textHeadingColor)),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Text(
                       "Loved something? Unhappy with the food? Send your feedback here.",
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: theme.textSubheadingColor)),
-                  SizedBox(height: 10),
+                  ListTile(
+                      leading: Radio(
+                        groupValue: caterer,
+                        value: Caterer.jaiswal,
+                        onChanged: (Caterer? value) {
+                          caterer = value as Caterer;
+                          setState(() {});
+                        },
+                      ),
+                      title: Text("Jaiswal")),
+                  ListTile(
+                      leading: Radio(
+                        groupValue: caterer,
+                        value: Caterer.mohani,
+                        onChanged: (Caterer? value) {
+                          caterer = value as Caterer;
+                          setState(() {});
+                        },
+                      ),
+                      title: Text("Mohani")),
+                  const SizedBox(height: 10),
                   TextField(
                     minLines: 5,
                     maxLines: 10,
@@ -56,7 +79,7 @@ class _MessFeedBackState extends State<MessFeedBack> {
                     decoration: InputDecoration(
                         hintStyle: TextStyle(
                             color: theme.textHeadingColor.withAlpha(100)),
-                        border: OutlineInputBorder(
+                        border: const OutlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         hintText: 'Enter your review here.'),
                   ),
@@ -65,9 +88,14 @@ class _MessFeedBackState extends State<MessFeedBack> {
                     //   borderRadius: BorderRadius.circular(16.0),
                     // ),
                     // color: theme.buttonColor,
+                    // TODO
                     onPressed: () {
                       dataContainer.mess.sheet.writeData([
-                        [DateTime.now().toString(), review]
+                        [
+                          DateTime.now().toString(),
+                          review,
+                          (caterer == Caterer.jaiswal) ? "Jaiswal" : "Mohani"
+                        ]
                       ], 'messFeedbackText!A:D');
                       Navigator.of(context).pop();
                     },
