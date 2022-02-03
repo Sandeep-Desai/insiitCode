@@ -51,16 +51,32 @@ class _MessMenuState extends State<MessMenu> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Container(
-                      width: ScreenSize.size.width * 0.6,
-                      child: Text(
-                        item.name,
-                        style: TextStyle(
-                            fontSize: 16.0, color: theme.textHeadingColor),
-                      ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Container(
+                          width: ScreenSize.size.width * 0.4,
+                          child: Text(
+                            item.name,
+                            style: TextStyle(
+                                fontSize: 16.0, color: theme.textHeadingColor),
+                          ),
+                        ),
+                        Text("kCal: " + item.calories,
+                            style: TextStyle(
+                              color: theme.textSubheadingColor,
+                            ))
+                      ],
                     ),
                     Row(
                       children: <Widget>[
+                        (item.glutenFree) //TODO replace with asset
+                            ? Image.network(
+                                "https://cdn1.iconfinder.com/data/icons/eco-food-and-cosmetic-labels/128/Artboard_15-512.png",
+                                height: ScreenSize.size.height * 0.05,
+                              )
+                            : Container(),
                         IconButton(
                           icon: const Icon(
                             Icons.thumb_down_alt,
