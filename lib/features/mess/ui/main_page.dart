@@ -85,7 +85,7 @@ class _MessMenuState extends State<MessMenu> {
                                 ]
                               ], 'messFeedbackItems!A:C');
                             });
-                            dataContainer.mess.storeFoodVotes();
+                            dataContainer.mess.updateFoodVote(item);
                           },
                         ),
                         IconButton(
@@ -113,7 +113,7 @@ class _MessMenuState extends State<MessMenu> {
                                 ]
                               ], 'messFeedbackItems!A:C');
                             });
-                            dataContainer.mess.storeFoodVotes();
+                            dataContainer.mess.updateFoodVote(item);
                           },
                         )
                       ],

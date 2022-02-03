@@ -112,6 +112,7 @@ class MessContainer {
 
   void loadFoodVotesData() {
     var data = cache.get('foodvotes') ?? {};
+    log('Loading foodvotes ${cache.get('foodvotes')}', name: debugTag);
     for (int i = 0; i < 7; i++) {
       for (MessItem item in items[i]!.breakfast) {
         item.vote = data[item.name] ?? 0;
@@ -128,8 +129,10 @@ class MessContainer {
     }
   }
 
-  void storeFoodVotes() {
+  void updateFoodVote(item) {
+    foodVotes[item.name] = item.vote;
     cache.put('foodvotes', foodVotes);
+    log('Storing foodvotes $foodVotes', name: debugTag);
   }
 
   void selectMeal() {
