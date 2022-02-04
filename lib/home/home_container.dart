@@ -150,13 +150,16 @@ class _HomePageState extends State<HomePage>
         centerTitle: true,
       ),
       body: PageView(
-        physics: new NeverScrollableScrollPhysics(),
+        physics: const NeverScrollableScrollPhysics(),
         controller: pageController,
         onPageChanged: (index) {
           setState(() => selectedIndex = index);
         },
         children: const <Widget>[
           MainHomePage(),
+          // MainHomePage(),
+          // MainHomePage(),
+          // MainHomePage(),
           // FeedPage(),
         ],
       ),

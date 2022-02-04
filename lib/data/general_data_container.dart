@@ -23,14 +23,17 @@ class GeneralData {
     if (response.statusCode == 200) {
       ret = jsonDecode(response.body);
     }
+    log('Loaded quotes from internet', name: debugTag);
     box.put('quotes', quotes);
     return ret;
   }
 
   Future<void> loadData() async {
-    log('Loading data', name: debugTag);
     darkMode = box.get('darkMode') ?? false;
     quotes = box.get('quotes') ?? await loadQuotes();
+    if (quotes.length == 0) {
+      quotes = await loadQuotes();
+    }
   }
 
   void saveData() {

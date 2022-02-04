@@ -16,7 +16,7 @@ class GSheet {
   GSheet(this.spreadSheetID);
   Future<void> initializeCache() async {
     cache = await Hive.openBox(spreadSheetID);
-    debugTag += spreadSheetID;
+    debugTag += "|" + spreadSheetID;
     log('Loading sheet', name: debugTag);
   }
 

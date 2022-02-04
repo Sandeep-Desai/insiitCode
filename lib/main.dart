@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:insiit/features/mess/ui/feedback_page.dart';
@@ -11,7 +12,16 @@ import 'global/data/constants.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  // await Firebase.initializeApp(
+  //   options: const FirebaseOptions(
+  //     // apiKey: 'AIzaSyAHAsf51D0A407EklG1bs-5wA7EbyfNFg0',
+  //     // appId: '1:448618578101:ios:2bc5c1fe2ec336f8ac3efc',
+  //     // messagingSenderId: '448618578101',
+  //     // projectId: 'react-native-firebase-testing',
+  //     // databaseURL: 'https://react-native-firebase-testing.firebaseio.com',
+  //     // storageBucket: 'react-native-firebase-testing.appspot.com',
+  //   ),
+  // );
   var dir = await getApplicationDocumentsDirectory();
   Hive.init(dir.path);
 

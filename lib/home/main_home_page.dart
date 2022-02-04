@@ -25,9 +25,13 @@ class _MainHomePageState extends State<MainHomePage>
   @override
   void initState() {
     super.initState();
-    int quoteIndex = Random().nextInt(dataContainer.generalData.quotes.length);
-    quote = dataContainer.generalData.quotes[quoteIndex]['text'];
-    quoteAuthor = dataContainer.generalData.quotes[quoteIndex]['author'];
+
+    if (dataContainer.generalData.quotes.length != 0) {
+      int quoteIndex =
+          Random().nextInt(dataContainer.generalData.quotes.length);
+      quote = dataContainer.generalData.quotes[quoteIndex]['text'];
+      quoteAuthor = dataContainer.generalData.quotes[quoteIndex]['author'];
+    }
 
     setState(() {});
   }
@@ -98,17 +102,18 @@ class _MainHomePageState extends State<MainHomePage>
                 ]),
           ),
           const SizedBox(height: 10),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 0),
-            child: Text(
-              "\"" + quote + "\" - " + quoteAuthor,
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  fontSize: 12.0,
-                  fontStyle: FontStyle.italic,
-                  color: theme.textSubheadingColor),
+          if (quote != '')
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 0),
+              child: Text(
+                "\"" + quote + "\" - " + quoteAuthor,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 12.0,
+                    fontStyle: FontStyle.italic,
+                    color: theme.textSubheadingColor),
+              ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(32.0, 16, 16, 0),
             child: Column(
