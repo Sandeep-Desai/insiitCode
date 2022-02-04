@@ -1,4 +1,4 @@
-package com.example.insiit
+package ac.india.iitgn.insiit
 
 import io.flutter.embedding.android.FlutterActivity
 

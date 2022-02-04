@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:insiit/features/mess/ui/feedback_page.dart';
 import 'package:insiit/features/mess/ui/main_page.dart';
 import 'package:insiit/global/data/constants.dart';
+import 'package:insiit/home/home_container.dart';
 import 'package:path_provider/path_provider.dart';
 import 'home/main_home_page.dart';
 import 'data/data_container.dart';
@@ -47,6 +48,6 @@ class HomeWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScreenSize.size = MediaQuery.of(context).size;
-    return MainHomePage(() {});
+    return HomePage(() {});
   }
 }

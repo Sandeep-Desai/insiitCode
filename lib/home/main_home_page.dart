@@ -6,11 +6,7 @@ import 'dart:math';
 import 'package:insiit/global/theme/notifier.dart';
 
 class MainHomePage extends StatefulWidget {
-  late final Function reload;
-  MainHomePage(Function reloadEverythingCallback, {Key? key})
-      : super(key: key) {
-    reload = reloadEverythingCallback;
-  }
+  const MainHomePage({Key? key}) : super(key: key);
 
   @override
   _MainHomePageState createState() => _MainHomePageState();
@@ -39,164 +35,160 @@ class _MainHomePageState extends State<MainHomePage>
   @override
   Widget build(BuildContext context) {
     super.build(context);
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            const SizedBox(height: 60),
-            AnimatedContainer(
-              decoration: const BoxDecoration(
-                  color: Color(0xFFEE4400),
-                  borderRadius: BorderRadius.all(Radius.circular(10.0))),
-              height: (connected) ? 0 : 24,
-              width: 100,
-              duration: const Duration(milliseconds: 1000),
-              curve: Curves.linear,
-              child: const Center(
-                child: Text(
-                  "Offline",
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            (connected)
-                ? Container()
-                : const SizedBox(
-                    height: 10,
-                  ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 16, 16, 0),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    CircleAvatar(
-                      backgroundColor: Colors.transparent,
-                      minRadius: 30,
-                      child: ClipOval(
-                          child: CachedNetworkImage(
-                        fit: BoxFit.cover,
-                        width: 90.0,
-                        placeholder: (context, url) =>
-                            CircularProgressIndicator(
-                          backgroundColor: theme.iconColor,
-                        ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
-                        height: 90.0,
-                        imageUrl: user.imageUrl,
-                      )),
-                    ),
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Hey " + user.name.split(' ')[0] + '!',
-                            style: TextStyle(
-                                fontSize: 19,
-                                fontWeight: FontWeight.bold,
-                                color: theme.textHeadingColor),
-                          ),
-                          Text("How are you doing today? ",
-                              style:
-                                  TextStyle(color: theme.textSubheadingColor)),
-                        ]),
-                  ]),
-            ),
-            const SizedBox(height: 10),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 0),
+    return (SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          const SizedBox(height: 60),
+          AnimatedContainer(
+            decoration: const BoxDecoration(
+                color: Color(0xFFEE4400),
+                borderRadius: BorderRadius.all(Radius.circular(10.0))),
+            height: (connected) ? 0 : 24,
+            width: 100,
+            duration: const Duration(milliseconds: 1000),
+            curve: Curves.linear,
+            child: const Center(
               child: Text(
-                "\"" + quote + "\" - " + quoteAuthor,
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    fontSize: 12.0,
-                    fontStyle: FontStyle.italic,
-                    color: theme.textSubheadingColor),
+                "Offline",
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(32.0, 16, 16, 0),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Hungry?",
-                            style: TextStyle(
-                              fontSize: 18.0,
-                              color: theme.textHeadingColor,
+          ),
+          (connected)
+              ? Container()
+              : const SizedBox(
+                  height: 10,
+                ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 16, 16, 0),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    minRadius: 30,
+                    child: ClipOval(
+                        child: CachedNetworkImage(
+                      fit: BoxFit.cover,
+                      width: 90.0,
+                      placeholder: (context, url) => CircularProgressIndicator(
+                        backgroundColor: theme.iconColor,
+                      ),
+                      errorWidget: (context, url, error) =>
+                          const Icon(Icons.error),
+                      height: 90.0,
+                      imageUrl: user.imageUrl,
+                    )),
+                  ),
+                  Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Hey " + user.name.split(' ')[0] + '!',
+                          style: TextStyle(
+                              fontSize: 19,
                               fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            "Here's what's for Dinner!",
-                            style: TextStyle(color: theme.textSubheadingColor),
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.arrow_forward, color: theme.iconColor),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/messmenu');
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(32.0, 16, 16, 0),
-              child: Column(
-                children: <Widget>[
-                  Row(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            "Wondering what's next?",
-                            style: TextStyle(
-                                fontSize: 18.0,
-                                fontWeight: FontWeight.bold,
-                                color: theme.textHeadingColor),
-                          ),
-                          Text(
-                            "Enjoy your free time!",
-                            style: TextStyle(color: theme.textSubheadingColor),
-                          ),
-                        ],
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          Icons.arrow_forward,
-                          color: theme.iconColor.withAlpha(150),
+                              color: theme.textHeadingColor),
                         ),
-                        onPressed: () {
-                          Navigator.pushNamed(context, '/schedule')
-                              .then((value) => setState(() {}));
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 10),
-                ],
-              ),
+                        Text("How are you doing today? ",
+                            style: TextStyle(color: theme.textSubheadingColor)),
+                      ]),
+                ]),
+          ),
+          const SizedBox(height: 10),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(16.0, 0, 16, 0),
+            child: Text(
+              "\"" + quote + "\" - " + quoteAuthor,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 12.0,
+                  fontStyle: FontStyle.italic,
+                  color: theme.textSubheadingColor),
             ),
-          ],
-        ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(32.0, 16, 16, 0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Hungry?",
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            color: theme.textHeadingColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          "Here's what's for Dinner!",
+                          style: TextStyle(color: theme.textSubheadingColor),
+                        ),
+                      ],
+                    ),
+                    IconButton(
+                      icon: Icon(Icons.arrow_forward, color: theme.iconColor),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/messmenu');
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(32.0, 16, 16, 0),
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Wondering what's next?",
+                          style: TextStyle(
+                              fontSize: 18.0,
+                              fontWeight: FontWeight.bold,
+                              color: theme.textHeadingColor),
+                        ),
+                        Text(
+                          "Enjoy your free time!",
+                          style: TextStyle(color: theme.textSubheadingColor),
+                        ),
+                      ],
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        Icons.arrow_forward,
+                        color: theme.iconColor.withAlpha(150),
+                      ),
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/schedule')
+                            .then((value) => setState(() {}));
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 10),
+              ],
+            ),
+          ),
+        ],
       ),
-    );
+    ));
   }
 
   @override

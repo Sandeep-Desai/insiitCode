@@ -6,7 +6,7 @@ import 'package:hive/hive.dart';
 class GeneralData {
   String debugTag = 'GeneralData';
   bool darkMode = false;
-  late var quotes;
+  late var quotes = [];
   late Box box;
   Future<void> init() async {
     await Hive.openBox('genData').then((value) async {

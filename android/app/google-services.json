@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "488686527119",
+    "project_id": "insiit-b95a8",
+    "storage_bucket": "insiit-b95a8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488686527119:android:1279ecf3a806569637c6fa",
+        "android_client_info": {
+          "package_name": "ac.india.iitgn.insiit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "488686527119-67r5pnuamsfrti5dvackuo273pr8lvj0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ac.india.iitgn.insiit",
+            "certificate_hash": "494d28c6bb6e1d0a2528955b5ffde00c46dbf20b"
+          }
+        },
+        {
+          "client_id": "488686527119-0qu1gsvdvbf92a8e57arqiiogrp7gvu7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDH9tiybjUdfxjpGR3W-HwwZ0vbku_rLOM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "488686527119-0qu1gsvdvbf92a8e57arqiiogrp7gvu7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
