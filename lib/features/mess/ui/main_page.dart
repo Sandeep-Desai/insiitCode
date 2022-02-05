@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:insiit/features/mess/classes/item.dart';
-import 'package:insiit/features/mess/classes/slot.dart';
 import 'package:insiit/global/data/constants.dart';
 import 'package:insiit/global/theme/notifier.dart';
 

@@ -12,6 +12,8 @@ class MessContainer {
   Map<int, MessDay> items = {};
   Map<String, int> foodVotes = {};
   List<MessItem> currentMeal = [];
+  String currentMealTitle = "Breakfast";
+
   void getData({forceRefresh = false}) async {
     loadMessData(forceRefresh: forceRefresh);
   }
@@ -141,12 +143,16 @@ class MessContainer {
     int hour = DateTime.now().hour;
     if (hour >= 4 && hour <= 10.5) {
       currentMeal = items[day]!.breakfast;
+      currentMealTitle = "Breakfast";
     } else if (hour > 10.5 && hour <= 14.5) {
       currentMeal = items[day]!.lunch;
+      currentMealTitle = "Lunch";
     } else if (hour > 14.5 && hour < 18) {
       currentMeal = items[day]!.snacks;
+      currentMealTitle = "Snacks";
     } else {
       currentMeal = items[day]!.dinner;
+      currentMealTitle = "Dinner";
     }
   }
 }

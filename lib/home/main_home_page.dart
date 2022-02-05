@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:insiit/features/mess/ui/home_widget.dart';
 import 'package:insiit/global/classes/user.dart';
 import 'package:insiit/global/data/constants.dart';
 import 'dart:math';
@@ -26,7 +27,7 @@ class _MainHomePageState extends State<MainHomePage>
   void initState() {
     super.initState();
 
-    if (dataContainer.generalData.quotes.length != 0) {
+    if (dataContainer.generalData.quotes.isNotEmpty) {
       int quoteIndex =
           Random().nextInt(dataContainer.generalData.quotes.length);
       quote = dataContainer.generalData.quotes[quoteIndex]['text'];
@@ -134,7 +135,7 @@ class _MainHomePageState extends State<MainHomePage>
                           ),
                         ),
                         Text(
-                          "Here's what's for Dinner!",
+                          "Here's what's for ${dataContainer.mess.currentMealTitle.toLowerCase()}",
                           style: TextStyle(color: theme.textSubheadingColor),
                         ),
                       ],
@@ -151,46 +152,47 @@ class _MainHomePageState extends State<MainHomePage>
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(32.0, 16, 16, 0),
-            child: Column(
-              children: <Widget>[
-                Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Wondering what's next?",
-                          style: TextStyle(
-                              fontSize: 18.0,
-                              fontWeight: FontWeight.bold,
-                              color: theme.textHeadingColor),
-                        ),
-                        Text(
-                          "Enjoy your free time!",
-                          style: TextStyle(color: theme.textSubheadingColor),
-                        ),
-                      ],
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.arrow_forward,
-                        color: theme.iconColor.withAlpha(150),
-                      ),
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/schedule')
-                            .then((value) => setState(() {}));
-                      },
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 10),
-              ],
-            ),
-          ),
+          scrollableMessMenu(),
+          // Padding(
+          //   padding: const EdgeInsets.fromLTRB(32.0, 16, 16, 0),
+          //   child: Column(
+          //     children: <Widget>[
+          //       Row(
+          //         mainAxisSize: MainAxisSize.max,
+          //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //         children: <Widget>[
+          //           Column(
+          //             crossAxisAlignment: CrossAxisAlignment.start,
+          //             children: <Widget>[
+          //               Text(
+          //                 "Wondering what's next?",
+          //                 style: TextStyle(
+          //                     fontSize: 18.0,
+          //                     fontWeight: FontWeight.bold,
+          //                     color: theme.textHeadingColor),
+          //               ),
+          //               Text(
+          //                 "Enjoy your free time!",
+          //                 style: TextStyle(color: theme.textSubheadingColor),
+          //               ),
+          //             ],
+          //           ),
+          //           IconButton(
+          //             icon: Icon(
+          //               Icons.arrow_forward,
+          //               color: theme.iconColor.withAlpha(150),
+          //             ),
+          //             onPressed: () {
+          //               Navigator.pushNamed(context, '/schedule')
+          //                   .then((value) => setState(() {}));
+          //             },
+          //           ),
+          //         ],
+          //       ),
+          //       const SizedBox(height: 10),
+          //     ],
+          //   ),
+          // ),
         ],
       ),
     ));

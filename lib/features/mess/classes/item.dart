@@ -12,7 +12,7 @@ class MessItem {
     required this.glutenFree,
   }) {
     if (imageUrl == '-') {
-      imageUrl = "https://picsum.photos/200/300";
+      imageUrl = "https://picsum.photos/300/200";
     }
   }
 }
