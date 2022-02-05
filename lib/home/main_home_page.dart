@@ -148,7 +148,6 @@ class _MainHomePageState extends State<MainHomePage>
                     ),
                   ],
                 ),
-                const SizedBox(height: 10),
               ],
             ),
           ),

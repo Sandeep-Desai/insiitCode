@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:insiit/features/bottomNavBar/navbar.dart';
+import 'package:insiit/features/map/main_page.dart';
 import 'package:insiit/global/data/constants.dart';
 import 'package:insiit/global/theme/notifier.dart';
 import 'package:insiit/home/main_home_page.dart';
@@ -155,9 +156,9 @@ class _HomePageState extends State<HomePage>
         onPageChanged: (index) {
           setState(() => selectedIndex = index);
         },
-        children: const <Widget>[
-          MainHomePage(),
-          // MainHomePage(),
+        children: <Widget>[
+          const MainHomePage(),
+          MapPage(),
           // MainHomePage(),
           // MainHomePage(),
           // FeedPage(),
